@@ -47,7 +47,7 @@
 ## 📁 项目结构
 
 ```
-yupi-hot-monitor/
+lihongzy-hot-monitor/
 ├── docs/                    # 文档目录
 │   ├── README.md           # 项目说明
 │   ├── REQUIREMENTS.md     # 需求文档
