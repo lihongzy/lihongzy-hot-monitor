@@ -5,6 +5,86 @@ const openRouter = new OpenRouter({
   apiKey: process.env.OPENROUTER_API_KEY ?? ''
 });
 
+type ChatMessage = {
+  role: 'system' | 'user' | 'assistant';
+  content: string;
+};
+
+type AIProvider = 'openrouter' | 'siliconflow';
+
+const SILICONFLOW_API_URL = 'https://api.siliconflow.cn/v1/chat/completions';
+const DEFAULT_OPENROUTER_MODEL = 'tencent/hy3-preview:free';
+const DEFAULT_SILICONFLOW_MODEL = 'tencent/Hunyuan-MT-7B';
+
+function getAIProvider(): AIProvider {
+  if (process.env.AI_PROVIDER === 'siliconflow') return 'siliconflow';
+  if (process.env.AI_PROVIDER === 'openrouter') return 'openrouter';
+  return process.env.SILICONFLOW_API_KEY && !process.env.OPENROUTER_API_KEY ? 'siliconflow' : 'openrouter';
+}
+
+function hasConfiguredAI(): boolean {
+  return getAIProvider() === 'siliconflow'
+    ? Boolean(process.env.SILICONFLOW_API_KEY)
+    : Boolean(process.env.OPENROUTER_API_KEY);
+}
+
+async function sendChatCompletion(messages: ChatMessage[], maxTokens: number): Promise<string> {
+  const provider = getAIProvider();
+
+  if (provider === 'siliconflow') {
+    return sendSiliconFlowChat(messages, maxTokens);
+  }
+
+  return sendOpenRouterChat(messages, maxTokens);
+}
+
+async function sendOpenRouterChat(messages: ChatMessage[], maxTokens: number): Promise<string> {
+  const result = await openRouter.chat.send({
+    model: process.env.OPENROUTER_MODEL || DEFAULT_OPENROUTER_MODEL,
+    messages,
+    temperature: 0.2,
+    maxTokens
+  });
+
+  const rawContent = result.choices[0]?.message?.content || '';
+  return typeof rawContent === 'string' ? rawContent : JSON.stringify(rawContent);
+}
+
+async function sendSiliconFlowChat(messages: ChatMessage[], maxTokens: number): Promise<string> {
+  if (!process.env.SILICONFLOW_API_KEY) {
+    throw new Error('SILICONFLOW_API_KEY is not configured');
+  }
+
+  const response = await fetch(SILICONFLOW_API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.SILICONFLOW_API_KEY}`
+    },
+    body: JSON.stringify({
+      model: process.env.SILICONFLOW_MODEL || DEFAULT_SILICONFLOW_MODEL,
+      messages,
+      stream: false,
+      temperature: 0.2,
+      max_tokens: maxTokens
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`SiliconFlow API error: ${response.status} ${await response.text()}`);
+  }
+
+  const data = await response.json() as {
+    choices?: Array<{
+      message?: {
+        content?: string;
+      };
+    }>;
+  };
+
+  return data.choices?.[0]?.message?.content || '';
+}
+
 // ========== Query Expansion（查询扩展） ==========
 
 /**
@@ -23,16 +103,15 @@ export async function expandKeyword(keyword: string): Promise<string[]> {
   // 不管 AI 是否可用，先提取基础核心词
   const coreTerms = extractCoreTerms(keyword);
 
-  if (!process.env.OPENROUTER_API_KEY) {
+  if (!hasConfiguredAI()) {
     const result = [keyword, ...coreTerms];
     expansionCache.set(keyword, result);
     return result;
   }
 
   try {
-    const result = await openRouter.chat.send({
-      model: 'tencent/hy3-preview:free',
-      messages: [
+    const responseContent = await sendChatCompletion(
+      [
         {
           role: 'system',
           content: `你是一个搜索查询扩展专家。给定一个监控关键词，生成该关键词的变体和相关检索词，用于文本匹配。
@@ -53,12 +132,9 @@ export async function expandKeyword(keyword: string): Promise<string[]> {
           content: keyword
         }
       ],
-      temperature: 0.2,
-      maxTokens: 300
-    });
+      300
+    );
 
-    const rawContent = result.choices[0]?.message?.content || '';
-    const responseContent = typeof rawContent === 'string' ? rawContent : JSON.stringify(rawContent);
     const jsonMatch = responseContent.match(/\[[\s\S]*\]/);
     if (jsonMatch) {
       const parsed: string[] = JSON.parse(jsonMatch[0]);
@@ -152,8 +228,8 @@ export async function analyzeContent(content: string, keyword: string, preMatchR
   // 默认预匹配结果
   const matchResult = preMatchResult ?? { matched: false, matchedTerms: [] };
 
-  if (!process.env.OPENROUTER_API_KEY) {
-    console.warn('OpenRouter API key not configured, using fallback analysis');
+  if (!hasConfiguredAI()) {
+    console.warn('AI provider key not configured, using fallback analysis');
     return {
       isReal: true,
       relevance: matchResult.matched ? 50 : 20,
@@ -167,9 +243,8 @@ export async function analyzeContent(content: string, keyword: string, preMatchR
   try {
     const prompt = buildAnalysisPrompt(keyword, matchResult);
 
-    const result = await openRouter.chat.send({
-      model: 'deepseek/deepseek-v3.2',
-      messages: [
+    const responseContent = await sendChatCompletion(
+      [
         {
           role: 'system',
           content: prompt
@@ -179,13 +254,9 @@ export async function analyzeContent(content: string, keyword: string, preMatchR
           content: content.slice(0, 2000) // 限制内容长度
         }
       ],
-      temperature: 0.2, // 降低温度，提高判断一致性
-      maxTokens: 500
-    });
+      500
+    );
 
-    const rawContent = result.choices[0]?.message?.content || '';
-    const responseContent = typeof rawContent === 'string' ? rawContent : JSON.stringify(rawContent);
-    
     // 尝试解析 JSON
     const jsonMatch = responseContent.match(/\{[\s\S]*\}/);
     if (jsonMatch) {

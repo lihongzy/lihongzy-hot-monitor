@@ -1,0 +1,471 @@
+{
+  "keyword": "Claude Sonnet 4.6",
+  "generatedAt": "2026-05-22T13:25:22.016Z",
+  "generatedBy": "test-metric/collect-real-samples.ts",
+  "note": "Raw real-service samples. Add expectPass manually before calculating labeled accuracy.",
+  "sources": {
+    "account": {
+      "status": "fulfilled",
+      "count": 0
+    },
+    "twitter": {
+      "status": "fulfilled",
+      "count": 0
+    },
+    "bing": {
+      "status": "fulfilled",
+      "count": 10
+    },
+    "hackernews": {
+      "status": "fulfilled",
+      "count": 0
+    },
+    "sogou": {
+      "status": "fulfilled",
+      "count": 9
+    },
+    "bilibili": {
+      "status": "fulfilled",
+      "count": 20
+    },
+    "weibo": {
+      "status": "fulfilled",
+      "count": 0
+    }
+  },
+  "items": [
+    {
+      "title": "Claude Sonnet 4.6完全ガイド【2026年最新版】使い方・料金 ...",
+      "content": "1 day ago · Claude Sonnet 4.6とは？ 【2026年2月リリースの最新モデル】 Claude Sonnet 4.6は、Anthropicが2026年2月17日にリリースした最新AIモデルです。 前世代のSonnet 4.5から大幅に進化 …",
+      "url": "https://www.bing.com/ck/a?!&&p=ee91ac98ad64d3d2b1d2486566fd1386d0c6270db1fc86c9d9897c4e4efa824fJmltdHM9MTc3OTQwODAwMA&ptn=3&ver=2&hsh=4&fclid=39a1a9ac-4911-6339-1798-becd488862a6&u=a1aHR0cHM6Ly93YXN0ZWQtam9iLmhhdGVuYWJsb2cuY29tL2VudHJ5LzIwMjYvMDUvMjEvMDMxMTIz&ntb=1",
+      "source": "bing",
+      "expectPass": true
+    },
+    {
+      "title": "Claude Sonnet 4.6とは？性能や料金・使い方を徹底解説！",
+      "content": "2026年2月リリースのClaude Sonnet 4.6を徹底解説。 Opus 4.6比で性能差わずか1.2%・コスト80%削減を実現。 新機能・ベンチマーク・料金プラン・ビジネス活用例まで最新情報をまとめています。",
+      "url": "https://www.bing.com/ck/a?!&&p=e3a9db7fd23a0692008936b84862a0dd3e6d69caf5ce4349fb4823c10dd29a98JmltdHM9MTc3OTQwODAwMA&ptn=3&ver=2&hsh=4&fclid=39a1a9ac-4911-6339-1798-becd488862a6&u=a1aHR0cHM6Ly90ZWNoLWNhbXAuaW4vYWktbmF2aS9jbGF1ZGUtc29ubmV0LTQtNi8&ntb=1",
+      "source": "bing",
+      "expectPass": true
+    },
+    {
+      "title": "【2026年最新】Claude Sonnet 4.6完全ガイド｜料金・",
+      "content": "Apr 9, 2026 · Claude Sonnet 4.6は、Anthropicが 2026年 2月 17日 にリリースしたClaudeシリーズの中核モデルです。 「Sonnet」は従来、最高性能の「Opus」と軽量・高速の「Haiku」の中間に位置 …",
+      "url": "https://www.bing.com/ck/a?!&&p=3d2d4ade50eb7502c66ff865343bdd62fcb77b6e38878858f56da1e777c2365dJmltdHM9MTc3OTQwODAwMA&ptn=3&ver=2&hsh=4&fclid=39a1a9ac-4911-6339-1798-becd488862a6&u=a1aHR0cHM6Ly9haXBpY2tzLmpwL21hZy9jbGF1ZGUtc29ubmV0LTQtNi1ndWlkZS0yMDI2&ntb=1",
+      "source": "bing",
+      "expectPass": true
+    },
+    {
+      "title": "Claude Sonnet 4.6 \\ Anthropic",
+      "content": "Feb 17, 2026 · To get started, simply use claude-sonnet-4-6 via the Claude API. Sonnet 4.6 is a powerful, versatile model built for daily use, scaled production, and complex tasks across coding, …",
+      "url": "https://www.bing.com/ck/a?!&&p=ef7b0358dfd60e14ee2c1cd2db6ba6ac8f50abc15305bdeaca090324ebaf4becJmltdHM9MTc3OTQwODAwMA&ptn=3&ver=2&hsh=4&fclid=39a1a9ac-4911-6339-1798-becd488862a6&u=a1aHR0cHM6Ly93d3cuYW50aHJvcGljLmNvbS9jbGF1ZGUvc29ubmV0&ntb=1",
+      "source": "bing",
+      "expectPass": true
+    },
+    {
+      "title": "【2026年最新】Claude 4.6モデル徹底比較──Opus・Sonnet ...",
+      "content": "Mar 8, 2026 · この記事では、3モデルのベンチマーク・料金・実務での使い分けを徹底解説しつつ、 「SonnetとOpusの性能差がかつてないほど縮まった」という歴史的転換点 の意味を掘り下げます。 …",
+      "url": "https://www.bing.com/ck/a?!&&p=42bb16e65c4b6f4c659dd915092d155ca597b3b28a33b82a9e49258453a42fccJmltdHM9MTc3OTQwODAwMA&ptn=3&ver=2&hsh=4&fclid=39a1a9ac-4911-6339-1798-becd488862a6&u=a1aHR0cHM6Ly9xaWl0YS5jb20va2FpX2tvdS9pdGVtcy8yMjU1MTUwMGNhYmVlNWNkMDUwMg&ntb=1",
+      "source": "bing",
+      "expectPass": true
+    },
+    {
+      "title": "【決定版】Claude Sonnet 4.6徹底検証！ 一部Opus超えの ...",
+      "content": "Feb 17, 2026 · Claudeのモデルというと、最近はOpus 4.6を愛用している私ですが、Sonnetというと「コストを抑えたい時の選択肢」程度に捉えていました。 CursorやGitHub Copilotなど、いろんなAI …",
+      "url": "https://www.bing.com/ck/a?!&&p=15dd25bf69c81796f3c3cbd03f0f39340b2cea649e0b0c322550e7b8b16bd521JmltdHM9MTc3OTQwODAwMA&ptn=3&ver=2&hsh=4&fclid=39a1a9ac-4911-6339-1798-becd488862a6&u=a1aHR0cHM6Ly9ub3RlLmNvbS9tYXNhX3d1bmRlci9uL25iMjBmZDUzMmZjNzY&ntb=1",
+      "source": "bing",
+      "expectPass": true
+    },
+    {
+      "title": "Claude Sonnet 4.6 徹底解説 | 実機検証してわかった、4.5との ...",
+      "content": "Feb 22, 2026 · Claude Sonnet 4.6と4.5を同一プロンプトで実機検証。 単なる精度向上にとどまらない「実装力」の決定的な差を、ToDoアプリの実装比較から徹底解説します。 料金・ベンチマーク・ …",
+      "url": "https://www.bing.com/ck/a?!&&p=08d7a1a6b707e4766acdb2119d73182426356e74534534189dcae204b5dd1d2fJmltdHM9MTc3OTQwODAwMA&ptn=3&ver=2&hsh=4&fclid=39a1a9ac-4911-6339-1798-becd488862a6&u=a1aHR0cHM6Ly9haS1uYXRpdmUtaHViLmpwL2FydGljbGVzL21vZGVscy9jbGF1ZGUtc29ubmV0LTQtNi1yZXZpZXctMjAyNg&ntb=1",
+      "source": "bing",
+      "expectPass": true
+    },
+    {
+      "title": "Claude Sonnet 4.6の最新リリース【Opus 4.6 / Gemini 3 Proと ...",
+      "content": "Anthropicは2026年2月17日、Sonnetモデルの最新版となる Claude Sonnet 4.6 を発表しました 🎉. Sonnet 4.6は、コーディング、コンピュータ操作、長文コンテキスト推論、エージェント計画、ナレッジ …",
+      "url": "https://www.bing.com/ck/a?!&&p=e4864672f999a0d5534d325d6280e4ee85dd4e88a4aa34d5b0dce5f40d9c56c1JmltdHM9MTc3OTQwODAwMA&ptn=3&ver=2&hsh=4&fclid=39a1a9ac-4911-6339-1798-becd488862a6&u=a1aHR0cHM6Ly96ZW5uLmRldi9nYWxpcmFnZS9hcnRpY2xlcy9jbGF1ZGUtc29ubmV0LTQtNg&ntb=1",
+      "source": "bing",
+      "expectPass": true
+    },
+    {
+      "title": "GPT-5.4 vs Claude Sonnet 4.6 (2026) 究極のAIモデル比較",
+      "content": "OpenAI の GPT-5.4 （2026年3月5日リリース）と Anthropic の Claude Sonnet 4.6 （2026年2月17日リリース）は、同じ市場に対する競合するアプローチを表しています。 すなわち、ナレッジワーク …",
+      "url": "https://www.bing.com/ck/a?!&&p=ae50f9edd866637581fe2b8ef58dbc7c72c3c683758d14c34e3a425375528c1bJmltdHM9MTc3OTQwODAwMA&ptn=3&ver=2&hsh=4&fclid=39a1a9ac-4911-6339-1798-becd488862a6&u=a1aHR0cHM6Ly93d3cuY29tZXRhcGkuY29tL2phL2dwdC01LTQtdnMtY2xhdWRlLXNvbm5ldC00LTYtMjAyNi8&ntb=1",
+      "source": "bing",
+      "expectPass": true
+    },
+    {
+      "title": "Claude Sonnet 4.6使い方ガイド｜料金・Opus 4.6比較・API実装 ...",
+      "content": "Claude Sonnet 4.6の使い方を2026年2月時点で解説。 公開日、Opus 4.6との使い分け、API呼び出し例、文書作成・要約・コード補助の実務活用、Claude.aiとAPIの料金比較、FAQをまとめた中級者向 …",
+      "url": "https://www.bing.com/ck/a?!&&p=1fa709762f67b6c50cc1aff918605d62416b2b7ca67ea9adddf45efbd920e46aJmltdHM9MTc3OTQwODAwMA&ptn=3&ver=2&hsh=4&fclid=39a1a9ac-4911-6339-1798-becd488862a6&u=a1aHR0cHM6Ly9haS1yZWJvb3QuaW8vYWNhZGVteS9ibG9nL2NsYXVkZS1zb25uZXQtNC02LWd1aWRl&ntb=1",
+      "source": "bing",
+      "expectPass": true
+    },
+    {
+      "title": "ChatGPT平替来了?ClaudeSonnet4.6免费开放,3分钟注册全...",
+      "content": "🤖AI工具实测手把手教你注册Claude账号Sonnet4.6现已免费可用!3分钟完成注册·全程图文教程如果你关注AI领域,一定听说过Claude——Anthropic旗下的旗舰AI助手.它在代码、写作、逻辑推理方面的表现,已经让不少用户把它视为...    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n腾讯网http://mp.weixin.qq.com/c...2天前      \n🤖AI工具实测手把手教你注册Claude账号Sonnet4.6现已免费可用!3分钟完成注册·全程图文教程如果你关注AI领域,一定听说过Claude——Anthropic旗下的旗舰AI助手.它在代码、写作、逻辑推理方面的表现,已经让不少用户把它视为...",
+      "url": "http://mp.weixin.qq.com/s?src=11&timestamp=1779456320&ver=6736&signature=Prv--zr5Sfi1pkBsTT7UjhOcOc7D7eA8vuG9TWnEvrOQbewQkL8HjsfNDoi9LUV69ezXGXwVvuT1mt1uxLmOme4WFYEgpvSJmhYSL3ZlTGUQwdyBj2IN3VNuSW*l7c-o&new=1",
+      "source": "sogou",
+      "expectPass": false
+    },
+    {
+      "title": "Claude 4 系列模型对比：Opus 4.6、Sonnet 4.6、Haiku 4.5 的定位与...",
+      "content": "Claude 4 是Anthropic 截至 2026年05月 推出的主力商用大模型系列，包含三个层级——Opus 4.6（顶级推理）、Sonnet 4.6（均衡主力）、Haiku 4.5（高速...                                                                \n\n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n博客园https://www.cnblogs.com/q...2026-05-09      \n                                                            Claude 4 是Anthropic 截至 2026年05月 推出的主力商用大模型系列，包含三个层级——Opus 4.6（顶级推理）、Sonnet 4.6（均衡主力）、Haiku 4.5（高速...",
+      "url": "https://www.sogou.com/link?url=hedJjaC291P3yGwc7N55kLSc2ls_Ks2x4jK74szfub5-aQq_18D4GxawEMezDf1greaVHN88tHY.",
+      "source": "sogou",
+      "expectPass": true
+    },
+    {
+      "title": "Claude Sonnet 4.6 vs. GLM-4.6 Comparison",
+      "content": "Claude Sonnet 4.6 Anthropic GLM-4.6 Zhipu AI + + Learn More Update Features Learn More Update Features Add To Compare Add To Compare Related Products Gemini ...",
+      "url": "https://www.sogou.com/link?url=hedJjaC291OXYC1B6my5FiSUtb0ELM7WrXeuE7dW90-7mdkKFU5y1XlEq-BRuuWl0s-4YzETzwe1RoiqOgW5vNI5DhmoGJ0L",
+      "source": "sogou",
+      "expectPass": true
+    },
+    {
+      "title": "Claude Sonnet 4.6 vs. DeepSeek-V3.2 Comparison",
+      "content": "Claude Sonnet 4.6 Anthropic DeepSeek-V3.2 DeepSeek + + Learn More Update Features Learn More Update Features Add To Compare Add To Compare Related Products ...                                                                \n\n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \nhttps://sourceforge.net/s...1分钟前      \n                                                            Claude Sonnet 4.6 Anthropic DeepSeek-V3.2 DeepSeek + + Learn More Update Features Learn More Update Features Add To Compare Add To Compare Related Products ...",
+      "url": "https://www.sogou.com/link?url=hedJjaC291OXYC1B6my5FiSUtb0ELM7WrXeuE7dW90-7mdkKFU5y1XlEq-BRuuWl0s-4YzETzwfJ-HA33LerwZSO4ATauHnS5KVm0Qr0ef0.",
+      "source": "sogou",
+      "expectPass": true
+    },
+    {
+      "title": "Claude Mythos vs. Claude Sonnet 4.6 Comparison",
+      "content": "Claude Mythos Anthropic Claude Sonnet 4.6 Anthropic + + Learn More Update Features Learn More Update Features Add To Compare Add To Compare Related Products ...",
+      "url": "https://www.sogou.com/link?url=hedJjaC291OXYC1B6my5FiSUtb0ELM7WrXeuE7dW90-7mdkKFU5y1XlEq-BRuuWlYE62pjKGm_7KP9vjPysw1yUoo2VhocBJosCI1BJRSw0.",
+      "source": "sogou",
+      "expectPass": true
+    },
+    {
+      "title": "Claude Sonnet 4.6 vs. Xgen-small Comparison",
+      "content": "Claude Sonnet 4.6 Anthropic Xgen-small Salesforce + + Learn More Update Features Learn More Update Features Add To Compare Add To Compare Related Products Gemini ...",
+      "url": "https://www.sogou.com/link?url=hedJjaC291OXYC1B6my5FiSUtb0ELM7WrXeuE7dW90-7mdkKFU5y1XlEq-BRuuWl0s-4YzETzwciGioGNPLQmGLyISzh3jSnbhhp9J6i36M.",
+      "source": "sogou",
+      "expectPass": false
+    },
+    {
+      "title": "【世界顶尖模型能力评测】推理速度 claude sonnet 4.6, claude opus ...",
+      "content": "使用场景最佳选择原因日常编码 / 高频迭代代码生成速度比GPT-5.4快2-3倍，性价比最高深度推理 / 科研分析GPQA Diamond 达91.3%，深度推理遥遥领先桌面...",
+      "url": "https://www.sogou.com/link?url=hedJjaC291OIJTBNRyYefPAPw4iH1vcXzK1ZITMpOnOMZe0OD9J__8oy78LHK7SOS25mKtxOFqSt5pUc3zy0dg..",
+      "source": "sogou",
+      "expectPass": true
+    },
+    {
+      "title": "当Claude Sonnet 4.6开始写代码,程序员是升级打怪还是原地失业？ - ...",
+      "content": "Hacker News热议Claude Sonnet 4.6编程能力，有人惊叹效率飙升，有人恐惧岗位蒸发。本文拆解AI编程的真实水平、行业影响与人类工程师的未来定位。 你不...",
+      "url": "https://www.sogou.com/link?url=hedJjaC291P4rQpU54rYO8wQQHzXopVZQY48Ji4mJfuwgkK3iYxZgohLa8_RFOuYrP7i0hUBqFAa65FgRYqJuQRe1g9LJIAVreaVHN88tHY.",
+      "source": "sogou",
+      "expectPass": true
+    },
+    {
+      "title": "Is Claude Sonnet 4.6 taking way longer to perform a task？ · ...",
+      "content": "Is Claude Sonnet 4.6 taking way longer to perform a task?",
+      "url": "https://www.sogou.com/link?url=hedJjaC291MuovqUW6cN1r2qFbAbsj5CV3gIMiddwPHKsgazZDma-cJCQtybrjlsKUgtetkcBSA.",
+      "source": "sogou",
+      "expectPass": true
+    },
+    {
+      "title": "DeepSeek-TUI：免费的Claude Code克隆，本周GitHub第一 - Bitwise AI",
+      "content": "原视频：DeepSeek-TUI: The Free Claude Code Clone, GitHub #1 This Week\n原作者：Bitwise AI\n发布日期：2026-05-05\n视频链接：https://www.youtube.com/watch?v=esFAMw1Pdfs\n\n✨ 英文原声在p2\n\n本视频介绍了DeepSeek-TUI，一个基于Rust的终端代理，已成为GitHub热门仓库。它模仿了Claude Code但完全免费，使用DeepSeek V4模型。主要功能包括三种模式（计划",
+      "url": "https://www.bilibili.com/video/BV11j5y6gE9f",
+      "source": "bilibili",
+      "sourceId": "BV11j5y6gE9f",
+      "publishedAt": "2026-05-13T05:28:27Z",
+      "viewCount": 552,
+      "likeCount": 3,
+      "commentCount": 1,
+      "danmakuCount": 0,
+      "authorName": "侧光译室",
+      "authorUsername": "3546848207833185",
+      "expectPass": false
+    },
+    {
+      "title": "免魔法无套路无限制使用官网DeepSeek,GPT,Claude,Gemini等最新热门模型，非普通镜像站【5月最新版】",
+      "content": "分享一个AI一站式解决方案,非市面上的镜像站,免魔法,免关注公众号,免绑定各种,无隐私泄露,无各种套路,只需邮箱登陆,开箱即用。\n---------------------------------------------------------\n同步更新官方最新模型,全模型支持文件上传、分析、识图、联网。支持dalle-3绘图。支持移动、PC聊天记录多端同步。三网 CN2 线路优化，确保获得最快响应。\n-----------------------------------------\n三连+评论即可获得链",
+      "url": "https://www.bilibili.com/video/BV1j1dAByEXJ",
+      "source": "bilibili",
+      "sourceId": "BV1j1dAByEXJ",
+      "publishedAt": "2026-05-07T14:30:09Z",
+      "viewCount": 116,
+      "likeCount": 15,
+      "commentCount": 13,
+      "danmakuCount": 0,
+      "authorName": "Cyber萌妹丶",
+      "authorUsername": "3546793025473435",
+      "expectPass": false
+    },
+    {
+      "title": "【双语+纯享】🔥代码逆向狂魔Qwen3.6竟击败Gemma4与Claude Sonnet？！🤯本地LLM实战破解LTE调制解调器！",
+      "content": "https://www.youtube.com/watch?v=1jtlc-ffI_8\n感谢观看~~如果觉得视频内容不错，欢迎点赞、投币、三连和关注~~\n视频主要内容如下：\n🚀 Qwen3.6 35B MOE模型成功破解Gemma4与Qwen3.5都无法完成的真实逆向工程挑战：LTE调制解调器数据爬虫\n📊 通过三层编码挑战测试LLM能力（网络监控应用 → 怀旧DOOM火焰特效 → LTE调制解调器爬虫），其中第三个挑战因需处理数千行混淆JS代码而极其困难\n⚡ 采用128K上下文和Q8KV缓存，在36GB内",
+      "url": "https://www.bilibili.com/video/BV1Tn9aBqE6v",
+      "source": "bilibili",
+      "sourceId": "BV1Tn9aBqE6v",
+      "publishedAt": "2026-05-07T04:00:00Z",
+      "viewCount": 1485,
+      "likeCount": 26,
+      "commentCount": 2,
+      "danmakuCount": 0,
+      "authorName": "比特光锥_BightCone",
+      "authorUsername": "387022690",
+      "expectPass": false
+    },
+    {
+      "title": "Kimi K2.6 上线一周登顶 OpenRouter：用量超 Claude Sonnet 4.6 近 40%",
+      "content": "Kimi K2.6 为什么能在上线一周后冲到 OpenRouter 榜单第一。OpenRouter 统计的是真实 usage data，所以这件事反映的不是“谁更会宣传”，而是谁更频繁地被开发者拿去做事。\n\n\n## 相关链接\n- OpenRouter Rankings(https://openrouter.ai/rankings)\n- Kimi K2.6 模型页(https://openrouter.ai/moonshotai/kimi-k2.6)\n- Moonshot 平台(https://platfo",
+      "url": "https://www.bilibili.com/video/BV1qX9SBBEZ4",
+      "source": "bilibili",
+      "sourceId": "BV1qX9SBBEZ4",
+      "publishedAt": "2026-04-29T04:35:33Z",
+      "viewCount": 1754,
+      "likeCount": 21,
+      "commentCount": 0,
+      "danmakuCount": 0,
+      "authorName": "Terminator-AI",
+      "authorUsername": "328381287",
+      "expectPass": true
+    },
+    {
+      "title": "glm 5.1 vs sonnet 4.6 vs opus 4.6 在编程实践上",
+      "content": "glm 5.1 vs sonnet 4.6 vs opus 4.6 在编程实践上",
+      "url": "https://www.bilibili.com/video/BV1XZQYBVEDS",
+      "source": "bilibili",
+      "sourceId": "BV1XZQYBVEDS",
+      "publishedAt": "2026-04-14T02:15:37Z",
+      "viewCount": 1279,
+      "likeCount": 12,
+      "commentCount": 13,
+      "danmakuCount": 0,
+      "authorName": "白银三清",
+      "authorUsername": "361744550",
+      "expectPass": true
+    },
+    {
+      "title": "Nano Banana Pro制作PPT，编程Claude Sonnet 4.6、写作Gemini 3.1 Pro、科研GPT 5.4 Pro",
+      "content": "✅ 顶级模型长期满血：拒绝降智，火力全开！\n✅ 国内免翻直连：稳定！速度快！\n✅ 最新GPT5.4, Gemini3.1 Pro, 香蕉Pro等顶级模型一站式集成！\n👉 一键三连，快来体验吧！",
+      "url": "https://www.bilibili.com/video/BV1BbQsBcEeX",
+      "source": "bilibili",
+      "sourceId": "BV1BbQsBcEeX",
+      "publishedAt": "2026-04-13T05:29:31Z",
+      "viewCount": 152,
+      "likeCount": 7,
+      "commentCount": 0,
+      "danmakuCount": 22,
+      "authorName": "ChatAI研究院",
+      "authorUsername": "3690997357742729",
+      "expectPass": false
+    },
+    {
+      "title": "PPT-Master 使用 Claude Sonnet 模型生成 PPT 的成本单次理论上可以控制在 0.6 元人民币（0.08 美元）以下",
+      "content": "github 仓库地址：https://github.com/hugohe3/ppt-master\natomgit 仓库地址：https://atomgit.com/hugohe3/ppt-master\n其他内容可参见之前的视频或阅读仓库的 readme 文件。",
+      "url": "https://www.bilibili.com/video/BV1GgDeBGEcF",
+      "source": "bilibili",
+      "sourceId": "BV1GgDeBGEcF",
+      "publishedAt": "2026-04-07T12:12:58Z",
+      "viewCount": 7652,
+      "likeCount": 127,
+      "commentCount": 53,
+      "danmakuCount": 0,
+      "authorName": "hehugo",
+      "authorUsername": "111258938",
+      "expectPass": false
+    },
+    {
+      "title": "全网唯一保姆级Gemini3.1Pro免费使用教程（附Claude 4.6-sonnet模型）",
+      "content": "全网唯一保姆级Gemini3.1Pro免费使用教程（附Claude 4.6-sonnet模型）",
+      "url": "https://www.bilibili.com/video/BV1F2SRB5EcG",
+      "source": "bilibili",
+      "sourceId": "BV1F2SRB5EcG",
+      "publishedAt": "2026-04-06T05:09:47Z",
+      "viewCount": 337,
+      "likeCount": 6,
+      "commentCount": 8,
+      "danmakuCount": 3,
+      "authorName": "AI全模型",
+      "authorUsername": "3546819594291398",
+      "expectPass": false
+    },
+    {
+      "title": "成功解决GPT 5.4降智问题，Gemini 3.1 Pro，Claude Sonnet 4.6国内直接使用",
+      "content": "✅ 顶级模型长期满血：拒绝降智，火力全开！\n✅ 国内免翻直连：稳定！速度快！\n✅ 最新GPT5.4, Gemini3.1 Pro, 香蕉Pro等顶级模型一站式集成！\n👉 一键三连，快来体验吧！",
+      "url": "https://www.bilibili.com/video/BV1gZ9pBnEtM",
+      "source": "bilibili",
+      "sourceId": "BV1gZ9pBnEtM",
+      "publishedAt": "2026-04-02T05:21:08Z",
+      "viewCount": 453,
+      "likeCount": 9,
+      "commentCount": 7,
+      "danmakuCount": 11,
+      "authorName": "ChatAI研究院",
+      "authorUsername": "3690997357742729",
+      "expectPass": false
+    },
+    {
+      "title": "🔥Claude 4.6 系列全面横评！Sonnet vs Opus 性能价格实测，AI 打工人直接抄作业",
+      "content": "本视频介绍Anthropic最新发布的Sonnet  4.6语言模型，重点对比了其与Opus 4.6在性能、功能和价格方面的差异，并给出了日常使用场景的建议。",
+      "url": "https://www.bilibili.com/video/BV1yMXKBdECK",
+      "source": "bilibili",
+      "sourceId": "BV1yMXKBdECK",
+      "publishedAt": "2026-03-27T11:52:12Z",
+      "viewCount": 991,
+      "likeCount": 4,
+      "commentCount": 1,
+      "danmakuCount": 0,
+      "authorName": "AI大龙虾",
+      "authorUsername": "3546966160050507",
+      "expectPass": true
+    },
+    {
+      "title": "AI辅助工作，GPT 5.4多模态、Gemini 3.1 Pro写作、Claude Sonnet 4.6编程",
+      "content": "✅ 三连评论、私信up获取AI镜像站传送门。\n\n✅ 支持世界主流AI大模型，GPT-5.3、GPT-5.4 Thinking、Gemini 3.1 Pro、Claude Sonnet 4.6、Nano Banana Pro、Codex、Grok4.2。",
+      "url": "https://www.bilibili.com/video/BV1VoQyBCEFr",
+      "source": "bilibili",
+      "sourceId": "BV1VoQyBCEFr",
+      "publishedAt": "2026-03-25T05:22:48Z",
+      "viewCount": 406,
+      "likeCount": 9,
+      "commentCount": 2,
+      "danmakuCount": 26,
+      "authorName": "ChatGPT小怪兽",
+      "authorUsername": "1242467395",
+      "expectPass": false
+    },
+    {
+      "title": "【Claude】做了一个版本更新",
+      "content": "SakuraChat v1.18\nidea from Sakura , code by Sebastian【Claude sonnet 4.6】\nHTML make by cherry studio\n\n1. 技术拓展：可以直接调用supabase进行读写改。\n\n2. 修复助手发markdown格式的消息，用户使用浏览器打开HTML看不到的问题。\n\n3. 修复复制无法粘贴在聊天输入框里的问题。适配当前的主流输入法。\n\n4. api设置新增了top p变量。\n\n5. 新增美化css。",
+      "url": "https://www.bilibili.com/video/BV1z5QXB5EZk",
+      "source": "bilibili",
+      "sourceId": "BV1z5QXB5EZk",
+      "publishedAt": "2026-03-22T20:45:57Z",
+      "viewCount": 239,
+      "likeCount": 4,
+      "commentCount": 5,
+      "danmakuCount": 0,
+      "authorName": "SakuraSakuQAQ",
+      "authorUsername": "3493257608694301",
+      "expectPass": false
+    },
+    {
+      "title": "全国首发！GPT镜像站上线，GPT 5.4、Gemini 3.1 Pro、Claude Sonnet 4.6，性能更强，更稳定！",
+      "content": "✅ 三连评论、私信up获取AI镜像站传送门。\n\n✅ 支持世界主流AI大模型，GPT-5.3、GPT-5.4 Thinking、Gemini 3.1 Pro、Claude Sonnet 4.6、Nano Banana Pro、Codex、Grok4.2。",
+      "url": "https://www.bilibili.com/video/BV1tgAMzbEaZ",
+      "source": "bilibili",
+      "sourceId": "BV1tgAMzbEaZ",
+      "publishedAt": "2026-03-22T05:07:43Z",
+      "viewCount": 210,
+      "likeCount": 7,
+      "commentCount": 3,
+      "danmakuCount": 24,
+      "authorName": "ChatAI研究院",
+      "authorUsername": "3690997357742729",
+      "expectPass": false
+    },
+    {
+      "title": "全国首发！GPT镜像站上线，GPT 5.4、Gemini 3.1 Pro、Claude Sonnet 4.6，性能更强，更稳定！",
+      "content": "✅ 三连评论、私信up获取AI镜像站传送门。\n\n✅ 支持世界主流AI大模型，GPT-5.3、GPT-5.4 Thinking、Gemini 3.1 Pro、Claude Sonnet 4.6、Nano Banana Pro、Codex、Grok4.2。",
+      "url": "https://www.bilibili.com/video/BV1gDAMzwEMF",
+      "source": "bilibili",
+      "sourceId": "BV1gDAMzwEMF",
+      "publishedAt": "2026-03-22T02:27:36Z",
+      "viewCount": 516,
+      "likeCount": 7,
+      "commentCount": 1,
+      "danmakuCount": 27,
+      "authorName": "哪吒编程",
+      "authorUsername": "491732797",
+      "expectPass": false
+    },
+    {
+      "title": "【Claude】和家克一起搓了个聊天软件",
+      "content": "Sakura Chat  v1.16.4\nidea from Sakura ，create by Sebastian【Claude sonnet 4.6】\n\n一个纯HTML单文件的AI聊天界面，不需要任何安装，下载丢进浏览器直接用。\n\n核心功能\n对话历史全程保留在本地，刷新不丢失。发送时自动把当前时间（北京时间，精确到秒和星期）注入system prompt，AI永远知道现在几点。支持OpenAI兼容API，Base URL、路径、模型名称全部可以自定义，换接口只需改一行。\n\n设置系统\n设置面板分五个子页",
+      "url": "https://www.bilibili.com/video/BV1nfAPzgEVg",
+      "source": "bilibili",
+      "sourceId": "BV1nfAPzgEVg",
+      "publishedAt": "2026-03-21T20:09:42Z",
+      "viewCount": 242,
+      "likeCount": 5,
+      "commentCount": 2,
+      "danmakuCount": 0,
+      "authorName": "SakuraSakuQAQ",
+      "authorUsername": "3493257608694301",
+      "expectPass": false
+    },
+    {
+      "title": "AI最佳组合，GPT 5.4深度研究科研、Gemini 3.1 Pro写作、Claude Sonnet 4.6编程",
+      "content": "✅ 三连评论、私信up获取AI镜像站传送门。\n\n✅ 支持世界主流AI大模型，GPT-5.3、GPT-5.4 Thinking、Gemini 3.1 Pro、Claude Sonnet 4.6、Nano Banana Pro、Codex、Grok4.2。",
+      "url": "https://www.bilibili.com/video/BV1H2AEzyEFb",
+      "source": "bilibili",
+      "sourceId": "BV1H2AEzyEFb",
+      "publishedAt": "2026-03-20T05:42:42Z",
+      "viewCount": 610,
+      "likeCount": 15,
+      "commentCount": 2,
+      "danmakuCount": 29,
+      "authorName": "ChatGPT小怪兽",
+      "authorUsername": "1242467395",
+      "expectPass": false
+    },
+    {
+      "title": "Build ANYTHING With Grok 4.2 + Claude Sonnet 4.6!",
+      "content": "内容为王 AI产品 电子产品 改变人生 人工智能",
+      "url": "https://www.bilibili.com/video/BV1BPwkzqE4M",
+      "source": "bilibili",
+      "sourceId": "BV1BPwkzqE4M",
+      "publishedAt": "2026-03-19T00:33:28Z",
+      "viewCount": 16,
+      "likeCount": 4,
+      "commentCount": 0,
+      "danmakuCount": 0,
+      "authorName": "安得广厦千万间678",
+      "authorUsername": "3546924697258484",
+      "expectPass": false
+    },
+    {
+      "title": "Gemini Pro 3.1 VS Claude Sonnet 4.6： Who Wins？",
+      "content": "电子产品 内容为王 AI产品 改变人生 赚钱",
+      "url": "https://www.bilibili.com/video/BV1qAw6z8E3k",
+      "source": "bilibili",
+      "sourceId": "BV1qAw6z8E3k",
+      "publishedAt": "2026-03-18T21:02:25Z",
+      "viewCount": 10,
+      "likeCount": 5,
+      "commentCount": 0,
+      "danmakuCount": 0,
+      "authorName": "安得广厦千万间678",
+      "authorUsername": "3546924697258484",
+      "expectPass": true
+    },
+    {
+      "title": "Xcode MCP + Claude Desktop sonnet4.6 ai开发本地TTSApp",
+      "content": "Xcode MCP + Claude Desktop sonnet4.6 ai开发本地TTSApp",
+      "url": "https://www.bilibili.com/video/BV1jBwBzZE9y",
+      "source": "bilibili",
+      "sourceId": "BV1jBwBzZE9y",
+      "publishedAt": "2026-03-18T15:34:21Z",
+      "viewCount": 273,
+      "likeCount": 4,
+      "commentCount": 3,
+      "danmakuCount": 0,
+      "authorName": "若水是情",
+      "authorUsername": "1777157835",
+      "expectPass": true
+    },
+    {
+      "title": "知乎热点问题下属总是卡点上下班，工作没完成也不加班，我要的东西也不能及时给，怎么办？anthropic_claude-sonnet-4-6",
+      "content": "看AI老板会怎么说\n知乎热点问题下属总是卡点上下班，工作没完成也不加班，我要的东西也不能及时给，怎么办？anthropic_claude-sonnet-4-6",
+      "url": "https://www.bilibili.com/video/BV1DMwiz6EeG",
+      "source": "bilibili",
+      "sourceId": "BV1DMwiz6EeG",
+      "publishedAt": "2026-03-18T14:50:57Z",
+      "viewCount": 1,
+      "likeCount": 3,
+      "commentCount": 0,
+      "danmakuCount": 0,
+      "authorName": "白浪滔天314",
+      "authorUsername": "3546750658808750",
+      "expectPass": false
+    }
+  ]
+}
