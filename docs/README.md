@@ -1,129 +1,143 @@
-# 🔥 热点监控工具 ( Hot Monitor)
+# 热点监控工具 (Hot Monitor)
 
-> 一款自动发现热点、智能识别真假内容、实时推送通知的 AI 工具
+一个用于监控关键词热点、聚合多数据源、用 AI 评估相关性并推送通知的本地 Web 工具。
 
-## 📋 项目概述
-- 自动监控指定关键词的热点变化
-- 利用 AI 识别假冒内容
-- 第一时间发送通知
-- 定期收集指定范围内的热点信息
+## 项目概述
 
-## 🎯 核心功能
+- 维护一组监控关键词，并可启用或停用关键词。
+- 每 30 分钟自动检查热点，也支持从前端手动触发检查。
+- 从 Twitter/X、Bing、Hacker News、搜狗、B 站、微博等来源采集内容。
+- 使用 AI 对内容真实性、关键词相关性、重要程度和摘要进行分析。
+- 通过 Socket.io 向浏览器实时推送新热点和通知。
+- 对高重要级别热点尝试发送邮件通知。
 
-### 1. 关键词监控
-- 用户输入要监控的关键词
-- 当关键词相关内容出现时，利用 AI 识别真假
-- 第一时间发送通知
+## 技术栈
 
-### 2. 热点收集
-- 每 30 分钟自动收集指定范围内的热点
-- 多数据源聚合，确保信息全面
-- AI 分析热点价值和可信度
+| 层级 | 技术 |
+|------|------|
+| 前端 | React 19、TypeScript、Vite 7、React Router、Tailwind CSS 4、Radix UI、lucide-react、Socket.io Client |
+| 后端 | Node.js、TypeScript、Express 5、Socket.io、node-cron |
+| 数据库 | SQLite、Prisma |
+| AI 服务 | SiliconFlow 或 OpenRouter |
+| 数据源 | twitterapi.io、Bing、Hacker News、搜狗、B 站、微博 |
+| 通知 | Socket.io、Nodemailer |
+| 测试 | Vitest |
 
-### 3. 通知系统
-- 浏览器实时推送 (WebSocket)
-- 邮件通知 (SMTP)
+## 当前项目结构
 
-## 🛠️ 技术栈
-
-| 层级 | 技术 | 说明 |
-|------|------|------|
-| 前端 | React + Vite + TailwindCSS | 响应式、赛博朋克风格 UI |
-| 后端 | Node.js + Express | 轻量级 API 服务 |
-| 数据库 | SQLite + Prisma | 轻量存储、ORM |
-| AI 服务 | OpenRouter API | 热点验证、内容分析 |
-| 定时任务 | node-cron | 定时热点抓取 |
-| 实时通信 | Socket.io | 浏览器推送 |
-| 邮件 | Nodemailer | 邮件通知 |
-
-## 📊 数据源
-
-| 来源 | 方式 | 说明 |
-|------|------|------|
-| 网页搜索 | Bing/Google 爬虫 | 无需 API，控制频率 |
-| Twitter/X | twitterapi.io | 官方 API 接口 |
-| 聚合处理 | 多源去重 + AI 分析 | 确保信息质量 |
-
-## 📁 项目结构
-
-```
+```text
 lihongzy-hot-monitor/
-├── docs/                    # 文档目录
-│   ├── README.md           # 项目说明
-│   ├── REQUIREMENTS.md     # 需求文档
-│   └── API.md              # API 文档
-├── server/                  # 后端服务
+├── client/
 │   ├── src/
-│   │   ├── routes/         # API 路由
-│   │   ├── services/       # 业务逻辑
-│   │   │   ├── search/     # 搜索服务
-│   │   │   ├── twitter/    # Twitter 服务
-│   │   │   ├── ai/         # AI 分析服务
-│   │   │   └── notify/     # 通知服务
-│   │   ├── jobs/           # 定时任务
-│   │   ├── db/             # 数据库
-│   │   └── utils/          # 工具函数
-│   ├── prisma/             # Prisma ORM
+│   │   ├── app/                 # 前端应用入口和路由
+│   │   ├── components/          # 页面组件和通用 UI 组件
+│   │   ├── layouts/             # 页面布局
+│   │   ├── pages/               # dashboard、keywords、search 页面
+│   │   ├── services/            # API、HTTP 客户端、Socket 客户端和类型
+│   │   └── utils/               # 前端工具函数
 │   └── package.json
-├── client/                  # 前端应用
+├── server/
+│   ├── prisma/
+│   │   ├── schema.prisma        # Prisma 数据模型
+│   │   └── migrations/          # 数据库迁移
 │   ├── src/
-│   │   ├── components/     # UI 组件
-│   │   ├── pages/          # 页面
-│   │   ├── hooks/          # 自定义 Hooks
-│   │   ├── services/       # API 调用
-│   │   └── styles/         # 样式
+│   │   ├── config/              # 环境配置
+│   │   ├── jobs/                # 定时任务和热点检查
+│   │   ├── middleware/          # Express 中间件
+│   │   ├── realtime/            # Socket.io 服务
+│   │   ├── routes/              # REST API 路由
+│   │   ├── services/            # AI、搜索、Twitter、邮件等服务
+│   │   ├── utils/               # 后端工具函数
+│   │   ├── app.ts               # Express app 创建
+│   │   ├── server.ts            # HTTP/Socket 服务启动
+│   │   └── index.ts             # 后端入口
 │   └── package.json
-├── skills/                  # Agent Skills
-│   └── SKILL.md            # 技能描述
-└── .env.example            # 环境变量模板
+├── docs/                        # 项目文档
+├── skills/hot-monitor/          # Agent Skill
+└── test-metric/                 # 独立热点量化评估工具
 ```
 
-## ⚙️ 配置说明
+## 环境变量
+
+后端使用 `server/.env`，模板见 `server/.env.example`。
 
 ```env
-# OpenRouter AI
-OPENROUTER_API_KEY=your_openrouter_key
+DATABASE_URL="file:./dev.db"
+PORT=3001
+CLIENT_URL=http://localhost:5173
 
-# Twitter API (twitterapi.io)
-TWITTER_API_KEY=your_twitter_api_key
+AI_PROVIDER=siliconflow
+SILICONFLOW_API_KEY=
+SILICONFLOW_MODEL=tencent/Hunyuan-MT-7B
 
-# 邮件通知
-SMTP_HOST=smtp.example.com
+# 或使用 OpenRouter
+# AI_PROVIDER=openrouter
+# OPENROUTER_API_KEY=
+# OPENROUTER_MODEL=tencent/hy3-preview:free
+
+TWITTER_API_KEY=
+
+SMTP_HOST=smtp.qq.com
 SMTP_PORT=587
-SMTP_USER=your_email
-SMTP_PASS=your_password
-NOTIFY_EMAIL=receive@example.com
-
-# 监控配置
-MONITOR_INTERVAL=1800000  # 30分钟 (毫秒)
+SMTP_SECURE=false
+SMTP_USER=
+SMTP_PASS=
+NOTIFY_EMAIL=
 ```
 
-## 🚀 快速开始
+`server/prisma/dev.db` 是本地 SQLite 数据库文件，应由 `.gitignore` 排除，不应提交到 Git。
 
-```bash
-# 1. 安装依赖
-cd server && npm install
-cd client && npm install
+## 快速开始
 
-# 2. 配置环境变量
-cp .env.example .env
-# 编辑 .env 文件填入你的 API Keys
-
-# 3. 初始化数据库
-cd server && npx prisma migrate dev
-
-# 4. 启动服务
-cd server && npm run dev
-cd client && npm run dev
+```powershell
+cd server
+npm install
+Copy-Item .env.example .env
+npm run db:generate
+npm run db:migrate
+npm run dev
 ```
 
-## 📝 开发日志
+另开一个终端：
 
-- [ ] 项目初始化
-- [ ] 后端 API 开发
-- [ ] 数据源对接
-- [ ] AI 集成 (OpenRouter)
-- [ ] 前端页面开发
-- [ ] 通知系统开发
-- [ ] 测试与验收
-- [ ] Agent Skills 封装
+```powershell
+cd client
+npm install
+npm run dev
+```
+
+默认访问地址：
+
+- 前端：http://localhost:5173
+- 后端健康检查：http://localhost:3001/api/health
+- Prisma Studio：在 `server/` 下执行 `npm run db:studio`
+
+## 常用命令
+
+后端：
+
+```powershell
+cd server
+npm run dev
+npm run build
+npm test
+npm run db:generate
+npm run db:migrate
+npm run db:studio
+```
+
+前端：
+
+```powershell
+cd client
+npm run dev
+npm run lint
+npm run build
+npm run format:check
+```
+
+## 主要功能页面
+
+- `/`：热点雷达，展示统计、热点列表、筛选、排序、分页和手动刷新。
+- `/keywords`：监控词管理，支持新增、启停和删除关键词。
+- `/search`：手动搜索指定关键词，并在前端对搜索结果做筛选和排序。

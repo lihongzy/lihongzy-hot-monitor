@@ -1,209 +1,186 @@
-# 📋 需求文档 - 热点监控工具
+# 需求文档 - 热点监控工具
 
-## 1. 项目背景
-- 第一时间获取 AI 领域热点（如大模型更新）
-- 不依赖人工手动搜索
-- 自动发现热点变化
-- 及时收到通知
+本文档按当前真实代码状态修订，避免与实现脱节。
 
-## 2. 功能需求
+## 1. 项目目标
 
-### 2.1 关键词监控功能
+- 自动监控用户配置的关键词。
+- 定时从多个信息源发现与关键词相关的新内容。
+- 使用 AI 评估内容真实性、关键词相关性、重要程度和摘要。
+- 保存热点历史，支持筛选、排序、分页查看。
+- 通过浏览器实时通知和可选邮件通知提醒用户。
 
-| 需求项 | 描述 | 优先级 |
-|--------|------|--------|
-| 添加关键词 | 用户可添加多个监控关键词 | P0 |
-| 编辑/删除关键词 | 管理已添加的关键词 | P0 |
-| 实时监控 | 每 30 分钟检查一次 | P0 |
-| AI 真假识别 | 利用 AI 识别假冒内容 | P0 |
-| 重复过滤 | 避免重复通知同一热点 | P1 |
+## 2. 已实现功能范围
 
-### 2.2 热点收集功能
+### 2.1 关键词管理
 
-| 需求项 | 描述 | 优先级 |
-|--------|------|--------|
-| 定时抓取 | 每 30 分钟抓取一次 | P0 |
-| 多数据源 | 网页搜索 + Twitter | P0 |
-| 范围设置 | 用户指定收集范围（如"AI 编程"）| P0 |
-| 热点列表 | 展示收集到的热点 | P0 |
-| AI 分析 | 分析热点价值和可信度 | P1 |
-| 历史记录 | 保存历史热点 | P2 |
+| 功能 | 状态 | 对应代码 |
+|------|------|----------|
+| 获取关键词列表 | 已实现 | `server/src/routes/keywords.ts` |
+| 获取单个关键词及最近热点 | 已实现 | `server/src/routes/keywords.ts` |
+| 新增关键词 | 已实现 | `server/src/routes/keywords.ts` |
+| 更新关键词文本、分类、启用状态 | 已实现 | `server/src/routes/keywords.ts` |
+| 启停关键词 | 已实现 | `PATCH /api/keywords/:id/toggle` |
+| 删除关键词 | 已实现 | `server/src/routes/keywords.ts` |
 
-### 2.3 通知功能
+### 2.2 热点采集与分析
 
-| 需求项 | 描述 | 优先级 |
-|--------|------|--------|
-| 浏览器推送 | WebSocket 实时推送 | P0 |
-| 邮件通知 | SMTP 邮件发送 | P0 |
-| 通知设置 | 开关各种通知方式 | P1 |
-| 通知历史 | 查看通知记录 | P2 |
+| 功能 | 状态 | 对应代码 |
+|------|------|----------|
+| 每 30 分钟自动检查 | 已实现 | `server/src/jobs/scheduler.ts` |
+| 手动触发热点检查 | 已实现 | `POST /api/check-hotspots` |
+| 多来源采集 | 已实现 | `server/src/jobs/hotspotChecker.ts` |
+| URL + 来源去重 | 已实现 | `@@unique([url, source])` |
+| 新鲜度过滤 | 已实现 | `server/src/jobs/hotspotChecker.ts` |
+| 关键词查询扩展 | 已实现 | `server/src/services/ai.ts` |
+| 关键词预匹配 | 已实现 | `server/src/services/ai.ts` |
+| AI 真假与相关性分析 | 已实现 | `server/src/services/ai.ts` |
+| 低相关内容过滤 | 已实现 | `server/src/jobs/hotspotChecker.ts` |
+| 热点统计 | 已实现 | `GET /api/hotspots/stats` |
 
-### 2.4 用户界面
+当前定时检查数据源：
 
-| 需求项 | 描述 | 优先级 |
-|--------|------|--------|
-| 响应式设计 | 兼容桌面和移动端 | P0 |
-| 独特风格 | 赛博朋克 + 数据仪表盘 | P0 |
-| 实时更新 | 热点数据实时刷新 | P1 |
-| 暗色主题 | 护眼暗色设计 | P1 |
+- Twitter/X
+- Bing
+- Hacker News
+- 搜狗
+- B 站
+- 微博
+- 平台账号检测和账号内容拉取
 
-## 3. 非功能需求
+### 2.3 通知
 
-### 3.1 性能要求
-- 页面加载时间 < 3s
-- API 响应时间 < 1s
-- 支持至少 100 个关键词监控
+| 功能 | 状态 | 对应代码 |
+|------|------|----------|
+| 新热点 Socket.io 推送 | 已实现 | `server/src/realtime/socket.ts`、`hotspotChecker.ts` |
+| 通知 Socket.io 推送 | 已实现 | `hotspotChecker.ts` |
+| 通知历史列表 | 已实现 | `server/src/routes/notifications.ts` |
+| 标记单条已读 | 已实现 | `PATCH /api/notifications/:id/read` |
+| 全部标记已读 | 已实现 | `PATCH /api/notifications/read-all` |
+| 删除通知 | 已实现 | `DELETE /api/notifications/:id` |
+| 清空通知 | 已实现 | `DELETE /api/notifications` |
+| 高重要级别邮件通知 | 已实现 | `server/src/services/email.ts` |
 
-### 3.2 可用性要求
-- 7x24 小时运行
-- 爬虫频率控制，避免被封
+### 2.4 前端页面
 
-### 3.3 安全要求
-- API Key 安全存储
-- 敏感配置不暴露
+| 页面 | 路径 | 功能 |
+|------|------|------|
+| 热点雷达 | `/` | 统计卡片、热点列表、筛选、排序、分页、手动刷新 |
+| 监控词 | `/keywords` | 新增、启停、删除关键词 |
+| 搜索 | `/search` | 手动搜索并筛选搜索结果 |
 
-## 4. 数据源规格
+前端 API 调用集中在 `client/src/services/`，页面组件不直接拼接底层 HTTP 逻辑。
 
-### 4.1 网页搜索爬虫
+## 3. 数据模型
 
-**目标搜索引擎：**
-- Bing 搜索
-- Google 搜索（备用）
+### Keyword
 
-**爬取策略：**
-- 频率限制：每次请求间隔 5-10 秒
-- User-Agent 轮换
-- 代理支持（可选）
+- `id`
+- `text`
+- `category`
+- `isActive`
+- `createdAt`
+- `updatedAt`
 
-**数据提取：**
-- 标题
-- 摘要
-- 链接
-- 发布时间（如有）
+### Hotspot
 
-### 4.2 Twitter/X API
+包含：
 
-**API 提供商：** twitterapi.io
+- 基础内容：`title`、`content`、`url`、`source`、`sourceId`
+- AI 分析：`isReal`、`relevance`、`relevanceReason`、`keywordMentioned`、`importance`、`summary`
+- 互动指标：`viewCount`、`likeCount`、`retweetCount`、`replyCount`、`commentCount`、`quoteCount`、`danmakuCount`
+- 作者信息：`authorName`、`authorUsername`、`authorAvatar`、`authorFollowers`、`authorVerified`
+- 时间：`publishedAt`、`createdAt`
+- 关联：`keywordId`
 
-**获取数据：**
-- 推文内容
-- 发布时间
-- 用户信息
-- 互动数据（点赞、转发）
+### Notification
 
-**搜索方式：**
-- 关键词搜索
-- 时间范围过滤
-- 热度排序
+- `type`
+- `title`
+- `content`
+- `isRead`
+- `hotspotId`
+- `createdAt`
 
-## 5. AI 分析规格
+### Setting
 
-### 5.1 OpenRouter 集成
+- `key`
+- `value`
 
-**用途：**
-1. **真假识别** - 判断内容是否为假冒/标题党
-2. **热点分析** - 评估热点价值和相关性
-3. **内容摘要** - 生成热点摘要
+## 4. API 设计
 
-**模型选择：**
-- 主模型：Claude 或 GPT-4
-- 备用模型：Gemini
+### 关键词
 
-**Prompt 设计：**
-```
-你是一个热点分析专家，请分析以下内容：
-1. 判断是否为真实的热点新闻（排除标题党、假新闻）
-2. 评估该热点与指定领域的相关性（0-100分）
-3. 评估热点的重要程度（低/中/高/紧急）
-4. 生成简短摘要（50字以内）
-
-输出 JSON 格式：
-{
-  "isReal": true/false,
-  "relevance": 0-100,
-  "importance": "low/medium/high/urgent",
-  "summary": "..."
-}
+```text
+GET    /api/keywords
+GET    /api/keywords/:id
+POST   /api/keywords
+PUT    /api/keywords/:id
+PATCH  /api/keywords/:id/toggle
+DELETE /api/keywords/:id
 ```
 
-## 6. 产品形态
+### 热点
 
-### 6.1 Web 页面
-
-**页面结构：**
-1. **仪表盘** - 总览热点统计
-2. **关键词管理** - 添加/编辑/删除
-3. **热点列表** - 展示收集的热点
-4. **设置页** - 通知配置、API 配置
-
-**UI 风格：**
-- 赛博朋克风格
-- 霓虹渐变色彩
-- 动态粒子背景
-- 卡片式布局
-- 响应式适配
-
-### 6.2 Agent Skills
-
-**技能描述：**
-- 作为 Copilot Agent Skill 使用
-- 可被其他 AI 调用
-- 支持关键词监控和热点查询
-
-## 7. 接口设计
-
-### 7.1 RESTful API
-
-```
-# 关键词管理
-GET    /api/keywords         # 获取所有关键词
-POST   /api/keywords         # 添加关键词
-PUT    /api/keywords/:id     # 更新关键词
-DELETE /api/keywords/:id     # 删除关键词
-
-# 热点数据
-GET    /api/hotspots         # 获取热点列表
-GET    /api/hotspots/:id     # 获取热点详情
-POST   /api/hotspots/search  # 手动搜索热点
-
-# 设置
-GET    /api/settings         # 获取设置
-PUT    /api/settings         # 更新设置
-
-# 通知
-GET    /api/notifications    # 获取通知历史
+```text
+GET    /api/hotspots
+GET    /api/hotspots/stats
+GET    /api/hotspots/:id
+POST   /api/hotspots/search
+DELETE /api/hotspots/:id
+POST   /api/check-hotspots
 ```
 
-### 7.2 WebSocket 事件
+### 通知
 
-```
-# 服务端 -> 客户端
-hotspot:new      # 新热点发现
-hotspot:update   # 热点更新
-notification     # 通知消息
-
-# 客户端 -> 服务端
-subscribe        # 订阅关键词
-unsubscribe      # 取消订阅
+```text
+GET    /api/notifications
+PATCH  /api/notifications/:id/read
+PATCH  /api/notifications/read-all
+DELETE /api/notifications/:id
+DELETE /api/notifications
 ```
 
-## 8. 验收标准
+### 设置
 
-### 8.1 功能验收
-- [ ] 能够添加和管理监控关键词
-- [ ] 能够自动从多数据源抓取热点
-- [ ] AI 能够正确识别假冒内容
-- [ ] 能够通过浏览器收到实时推送
-- [ ] 能够通过邮件收到通知
-- [ ] 页面响应式适配正常
-- [ ] UI 风格独特美观
+```text
+GET    /api/settings
+GET    /api/settings/:key
+PUT    /api/settings
+PUT    /api/settings/:key
+```
 
-### 8.2 性能验收
-- [ ] 页面加载时间 < 3s
-- [ ] 热点抓取功能稳定
-- [ ] 通知发送及时
+### WebSocket
 
-### 8.3 Agent Skills 验收
-- [ ] 技能文件格式正确
-- [ ] 能够被 AI 正确调用
-- [ ] 返回数据格式规范
+客户端发送：
+
+```text
+subscribe
+unsubscribe
+```
+
+服务端发送：
+
+```text
+hotspot:new
+notification
+```
+
+## 5. 运行与配置要求
+
+- 后端环境变量模板为 `server/.env.example`。
+- 本地密钥只放在 `server/.env`。
+- SQLite 数据库文件为 `server/prisma/dev.db`，不应提交到 Git。
+- Prisma schema 和 migrations 需要提交。
+- 构建产物 `server/dist/` 不应作为业务文档或源码依据。
+
+## 6. 验收标准
+
+- 可以新增、启停和删除关键词。
+- 可以通过定时任务或手动按钮触发热点检查。
+- 热点列表支持来源、重要性、关键词、真假、时间范围筛选。
+- 热点列表支持时间、发布时间、相关性、重要性、热度排序。
+- 新热点会写入数据库并创建通知记录。
+- 浏览器可以接收 `hotspot:new` 和 `notification` 事件。
+- 高重要级别热点在 SMTP 配置完整时会发送邮件。
+- `server/prisma/dev.db` 不再被 Git 追踪。
