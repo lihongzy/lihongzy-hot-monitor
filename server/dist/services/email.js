@@ -1,39 +1,38 @@
-import nodemailer from 'nodemailer';
-import { hasConfiguredEnv } from '../utils/env.js';
+import nodemailer from "nodemailer";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let transporter = null;
 function getTransporter() {
-    if (!hasConfiguredEnv(process.env.SMTP_HOST) ||
-        !hasConfiguredEnv(process.env.SMTP_USER) ||
-        !hasConfiguredEnv(process.env.SMTP_PASS)) {
-        console.warn('Email configuration incomplete, notifications disabled');
+    if (!process.env.SMTP_HOST ||
+        !process.env.SMTP_USER ||
+        !process.env.SMTP_PASS) {
+        console.warn("Email configuration incomplete, notifications disabled");
         return null;
     }
     if (!transporter) {
         transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
-            port: parseInt(process.env.SMTP_PORT || '587'),
-            secure: process.env.SMTP_SECURE === 'true',
+            port: parseInt(process.env.SMTP_PORT || "587"),
+            secure: process.env.SMTP_SECURE === "true",
             auth: {
                 user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS
-            }
+                pass: process.env.SMTP_PASS,
+            },
         });
     }
     return transporter;
 }
 export async function sendHotspotEmail(hotspot) {
     const mailer = getTransporter();
-    if (!mailer || !hasConfiguredEnv(process.env.NOTIFY_EMAIL)) {
+    if (!mailer || !process.env.NOTIFY_EMAIL) {
         return false;
     }
     const importanceEmoji = {
-        low: '📌',
-        medium: '⚡',
-        high: '🔥',
-        urgent: '🚨'
+        low: "📌",
+        medium: "⚡",
+        high: "🔥",
+        urgent: "🚨",
     };
-    const emoji = importanceEmoji[hotspot.importance] || '📌';
+    const emoji = importanceEmoji[hotspot.importance] || "📌";
     try {
         await mailer.sendMail({
             from: process.env.SMTP_USER,
@@ -69,13 +68,13 @@ export async function sendHotspotEmail(hotspot) {
               
               <p><span class="badge badge-${hotspot.importance}">${hotspot.importance.toUpperCase()}</span></p>
               
-              ${hotspot.summary ? `<p><strong>摘要：</strong>${hotspot.summary}</p>` : ''}
+              ${hotspot.summary ? `<p><strong>摘要：</strong>${hotspot.summary}</p>` : ""}
               
               <div class="meta">
                 <p><strong>来源：</strong>${hotspot.source}</p>
                 <p><strong>相关性评分：</strong>${hotspot.relevance}/100</p>
-                ${hotspot.keyword ? `<p><strong>关键词：</strong>${hotspot.keyword.text}</p>` : ''}
-                <p><strong>发现时间：</strong>${new Date(hotspot.createdAt).toLocaleString('zh-CN')}</p>
+                ${hotspot.keyword ? `<p><strong>关键词：</strong>${hotspot.keyword.text}</p>` : ""}
+                <p><strong>发现时间：</strong>${new Date(hotspot.createdAt).toLocaleString("zh-CN")}</p>
               </div>
               
               <a href="${hotspot.url}" class="button">查看原文 →</a>
@@ -83,23 +82,24 @@ export async function sendHotspotEmail(hotspot) {
           </div>
         </body>
         </html>
-      `
+      `,
         });
         console.log(`Email sent for hotspot: ${hotspot.id}`);
         return true;
     }
     catch (error) {
-        console.error('Failed to send email:', error);
+        console.error("Failed to send email:", error);
         return false;
     }
 }
 export async function sendDigestEmail(hotspots) {
     const mailer = getTransporter();
-    if (!mailer || !hasConfiguredEnv(process.env.NOTIFY_EMAIL) || hotspots.length === 0) {
+    if (!mailer || !process.env.NOTIFY_EMAIL || hotspots.length === 0) {
         return false;
     }
     try {
-        const hotspotsHtml = hotspots.map(h => `
+        const hotspotsHtml = hotspots
+            .map((h) => `
       <tr>
         <td style="padding: 10px; border-bottom: 1px solid #eee;">
           <a href="${h.url}" style="color: #667eea; text-decoration: none;">${h.title.slice(0, 60)}...</a>
@@ -107,7 +107,8 @@ export async function sendDigestEmail(hotspots) {
         <td style="padding: 10px; border-bottom: 1px solid #eee;">${h.source}</td>
         <td style="padding: 10px; border-bottom: 1px solid #eee;">${h.importance}</td>
       </tr>
-    `).join('');
+    `)
+            .join("");
         await mailer.sendMail({
             from: process.env.SMTP_USER,
             to: process.env.NOTIFY_EMAIL,
@@ -133,12 +134,12 @@ export async function sendDigestEmail(hotspots) {
           </table>
         </body>
         </html>
-      `
+      `,
         });
         return true;
     }
     catch (error) {
-        console.error('Failed to send digest email:', error);
+        console.error("Failed to send digest email:", error);
         return false;
     }
 }

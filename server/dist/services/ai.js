@@ -1,8 +1,63 @@
 import { OpenRouter } from '@openrouter/sdk';
-import { hasConfiguredEnv } from '../utils/env.js';
 const openRouter = new OpenRouter({
     apiKey: process.env.OPENROUTER_API_KEY ?? ''
 });
+const SILICONFLOW_API_URL = 'https://api.siliconflow.cn/v1/chat/completions';
+const DEFAULT_OPENROUTER_MODEL = 'tencent/hy3-preview:free';
+const DEFAULT_SILICONFLOW_MODEL = 'tencent/Hunyuan-MT-7B';
+function getAIProvider() {
+    if (process.env.AI_PROVIDER === 'siliconflow')
+        return 'siliconflow';
+    if (process.env.AI_PROVIDER === 'openrouter')
+        return 'openrouter';
+    return process.env.SILICONFLOW_API_KEY && !process.env.OPENROUTER_API_KEY ? 'siliconflow' : 'openrouter';
+}
+function hasConfiguredAI() {
+    return getAIProvider() === 'siliconflow'
+        ? Boolean(process.env.SILICONFLOW_API_KEY)
+        : Boolean(process.env.OPENROUTER_API_KEY);
+}
+async function sendChatCompletion(messages, maxTokens) {
+    const provider = getAIProvider();
+    if (provider === 'siliconflow') {
+        return sendSiliconFlowChat(messages, maxTokens);
+    }
+    return sendOpenRouterChat(messages, maxTokens);
+}
+async function sendOpenRouterChat(messages, maxTokens) {
+    const result = await openRouter.chat.send({
+        model: process.env.OPENROUTER_MODEL || DEFAULT_OPENROUTER_MODEL,
+        messages,
+        temperature: 0.2,
+        maxTokens
+    });
+    const rawContent = result.choices[0]?.message?.content || '';
+    return typeof rawContent === 'string' ? rawContent : JSON.stringify(rawContent);
+}
+async function sendSiliconFlowChat(messages, maxTokens) {
+    if (!process.env.SILICONFLOW_API_KEY) {
+        throw new Error('SILICONFLOW_API_KEY is not configured');
+    }
+    const response = await fetch(SILICONFLOW_API_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.SILICONFLOW_API_KEY}`
+        },
+        body: JSON.stringify({
+            model: process.env.SILICONFLOW_MODEL || DEFAULT_SILICONFLOW_MODEL,
+            messages,
+            stream: false,
+            temperature: 0.2,
+            max_tokens: maxTokens
+        })
+    });
+    if (!response.ok) {
+        throw new Error(`SiliconFlow API error: ${response.status} ${await response.text()}`);
+    }
+    const data = await response.json();
+    return data.choices?.[0]?.message?.content || '';
+}
 // ========== Query Expansion（查询扩展） ==========
 /**
  * 使用 AI 将关键词扩展为多个变体，用于文本预过滤。
@@ -17,18 +72,16 @@ export async function expandKeyword(keyword) {
     }
     // 不管 AI 是否可用，先提取基础核心词
     const coreTerms = extractCoreTerms(keyword);
-    if (!hasConfiguredEnv(process.env.OPENROUTER_API_KEY)) {
+    if (!hasConfiguredAI()) {
         const result = [keyword, ...coreTerms];
         expansionCache.set(keyword, result);
         return result;
     }
     try {
-        const result = await openRouter.chat.send({
-            model: 'deepseek/deepseek-v3.2',
-            messages: [
-                {
-                    role: 'system',
-                    content: `你是一个搜索查询扩展专家。给定一个监控关键词，生成该关键词的变体和相关检索词，用于文本匹配。
+        const responseContent = await sendChatCompletion([
+            {
+                role: 'system',
+                content: `你是一个搜索查询扩展专家。给定一个监控关键词，生成该关键词的变体和相关检索词，用于文本匹配。
 
 规则：
 1. 包含原始关键词的各种写法（大小写、空格、连字符变体）
@@ -40,17 +93,12 @@ export async function expandKeyword(keyword) {
 输出 JSON 数组，只输出 JSON，不要有其他内容。
 示例输入："Claude Sonnet 4.6"
 示例输出：["Claude Sonnet 4.6", "Claude Sonnet", "Sonnet 4.6", "claude-sonnet-4.6", "Claude 4.6", "Anthropic Sonnet"]`
-                },
-                {
-                    role: 'user',
-                    content: keyword
-                }
-            ],
-            temperature: 0.2,
-            maxTokens: 300
-        });
-        const rawContent = result.choices[0]?.message?.content || '';
-        const responseContent = typeof rawContent === 'string' ? rawContent : JSON.stringify(rawContent);
+            },
+            {
+                role: 'user',
+                content: keyword
+            }
+        ], 300);
         const jsonMatch = responseContent.match(/\[[\s\S]*\]/);
         if (jsonMatch) {
             const parsed = JSON.parse(jsonMatch[0]);
@@ -136,11 +184,11 @@ ${matchHint}
 export async function analyzeContent(content, keyword, preMatchResult) {
     // 默认预匹配结果
     const matchResult = preMatchResult ?? { matched: false, matchedTerms: [] };
-    if (!hasConfiguredEnv(process.env.OPENROUTER_API_KEY)) {
-        console.warn('OpenRouter API key not configured or still using a placeholder, using fallback analysis');
+    if (!hasConfiguredAI()) {
+        console.warn('AI provider key not configured, using fallback analysis');
         return {
             isReal: true,
-            relevance: matchResult.matched ? 60 : 20,
+            relevance: matchResult.matched ? 50 : 20,
             relevanceReason: '未配置 AI 服务，使用默认分数',
             keywordMentioned: matchResult.matched,
             importance: 'low',
@@ -149,23 +197,16 @@ export async function analyzeContent(content, keyword, preMatchResult) {
     }
     try {
         const prompt = buildAnalysisPrompt(keyword, matchResult);
-        const result = await openRouter.chat.send({
-            model: 'deepseek/deepseek-v3.2',
-            messages: [
-                {
-                    role: 'system',
-                    content: prompt
-                },
-                {
-                    role: 'user',
-                    content: content.slice(0, 2000) // 限制内容长度
-                }
-            ],
-            temperature: 0.2, // 降低温度，提高判断一致性
-            maxTokens: 500
-        });
-        const rawContent = result.choices[0]?.message?.content || '';
-        const responseContent = typeof rawContent === 'string' ? rawContent : JSON.stringify(rawContent);
+        const responseContent = await sendChatCompletion([
+            {
+                role: 'system',
+                content: prompt
+            },
+            {
+                role: 'user',
+                content: content.slice(0, 2000) // 限制内容长度
+            }
+        ], 500);
         // 尝试解析 JSON
         const jsonMatch = responseContent.match(/\{[\s\S]*\}/);
         if (jsonMatch) {
@@ -188,7 +229,7 @@ export async function analyzeContent(content, keyword, preMatchResult) {
         // Fallback
         return {
             isReal: true,
-            relevance: matchResult.matched ? 60 : 10,
+            relevance: matchResult.matched ? 30 : 10,
             relevanceReason: 'AI 分析失败，使用默认分数',
             keywordMentioned: matchResult.matched,
             importance: 'low',

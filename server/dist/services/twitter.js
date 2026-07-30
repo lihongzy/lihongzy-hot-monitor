@@ -1,4 +1,3 @@
-import { hasConfiguredEnv } from '../utils/env.js';
 const TWITTER_API_BASE = 'https://api.twitterapi.io';
 // 质量过滤阈值（按用户方案设定）
 export const TWITTER_FILTER_CONFIG = {
@@ -74,18 +73,17 @@ function buildAdvancedQuery(keyword, type) {
 // ============================================================
 async function makeTwitterRequest(endpoint, params = {}) {
     const apiKey = process.env.TWITTER_API_KEY;
-    if (!hasConfiguredEnv(apiKey)) {
-        console.warn('Twitter API key not configured or still using a placeholder');
+    if (!apiKey) {
+        console.warn('Twitter API key not configured');
         return { tweets: [] };
     }
-    const configuredApiKey = apiKey.trim();
     const url = new URL(`${TWITTER_API_BASE}${endpoint}`);
     Object.entries(params).forEach(([key, value]) => {
         url.searchParams.append(key, value);
     });
     const response = await fetch(url.toString(), {
         headers: {
-            'X-API-Key': configuredApiKey,
+            'X-API-Key': apiKey,
             'Content-Type': 'application/json'
         }
     });

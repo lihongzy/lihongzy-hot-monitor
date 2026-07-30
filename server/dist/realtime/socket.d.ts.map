@@ -1,0 +1,1 @@
+{"version":3,"file":"socket.d.ts","sourceRoot":"","sources":["../../src/realtime/socket.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,MAAM,IAAI,UAAU,EAAE,MAAM,MAAM,CAAA;AAChD,OAAO,EAAE,MAAM,EAAE,MAAM,WAAW,CAAA;AAGlC,wBAAgB,kBAAkB,CAAC,UAAU,EAAE,UAAU,iIA0BxD"}
